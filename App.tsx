@@ -29,6 +29,10 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import AppCenter from 'appcenter';
+import Analytics from 'appcenter-analytics';
+import Crashes from 'appcenter-crashes';
+
 const Section: React.FC<{
   title: string;
 }> = ({children, title}) => {
@@ -58,14 +62,26 @@ const Section: React.FC<{
 };
 
 const App = () => {
+  React.useEffect(() => {
+    const init = async () => {
+      await AppCenter.setLogLevel(AppCenter.LogLevel.VERBOSE);
+      await Analytics.setEnabled(true);
+      await Crashes.setEnabled(true);
+    };
+
+    init();
+  }, []);
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const sayHello = () => {
-    console.log('button clicked...');
+  const sayHello = async () => {
+    await Analytics.trackEvent('button clicked...', {
+      timestamp: new Date().toISOString(),
+    });
     Alert.alert('Hello, world!');
   };
 
