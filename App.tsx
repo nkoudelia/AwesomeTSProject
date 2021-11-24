@@ -10,6 +10,8 @@
 
 import React from 'react';
 import {
+  Alert,
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -62,6 +64,11 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const sayHello = () => {
+    console.log('button clicked...');
+    Alert.alert('Hello, world!');
+  };
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -69,6 +76,7 @@ const App = () => {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
+        <Button onPress={sayHello} title={'Say hi!'} />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
