@@ -12,6 +12,7 @@ import React from 'react';
 import {
   Alert,
   Button,
+  LogBox,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -32,6 +33,13 @@ import {
 import AppCenter from 'appcenter';
 import Analytics from 'appcenter-analytics';
 import Crashes from 'appcenter-crashes';
+
+LogBox.ignoreLogs([
+  "EventEmitter.removeListener('url', ...): Method has been deprecated",
+  "EventEmitter.removeListener('change', ...): Method has been deprecated",
+  "EventEmitter.removeListener('appStateDidChange', ...): Method has been deprecated",
+  'new NativeEventEmitter',
+]);
 
 const Section: React.FC<{
   title: string;
